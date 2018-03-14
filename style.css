@@ -134,6 +134,7 @@ body {
 .add__value {
     width: 10rem;
 }
+
 .add__description,
 .add__value {
     border: 1px solid #e7e7e7;
@@ -174,3 +175,34 @@ body {
 
 
 /***** LISTS *****/
+
+.container {
+    width: 100rem;
+    margin: 6rem auto;
+    display: flex;
+}
+
+.income {
+    width: 47.5rem;
+    margin-right: 5rem;
+}
+
+.expenses {
+    width: 47.5rem;
+}
+
+.income__title {
+    color: #28B9B5;
+}
+
+.expenses__title {
+    color: #FF5049;
+}
+
+.income__title,
+.expenses__title {
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
