@@ -15,6 +15,8 @@ html {
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 1.6rem;
+    color: #555;
+    font-weight: 400;
 }
 
 
@@ -205,4 +207,66 @@ body {
     font-size: 18px;
     font-weight: 400;
     margin-bottom: 15px;
+}
+
+.item:first-child {
+    border-top: 1px solid #e7e7e7;
+}
+
+.item {
+    padding: 1.3rem;
+    border-bottom: 1px solid #e7e7e7;
+    display: flex;
+    justify-content: space-between;
+}
+
+.item__value {
+    transition: transform .3s;
+}
+
+.item__right {
+    display: flex;
+}
+
+.item__delete--btn {
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+    display: none;
+}
+
+.income .item__value,
+.income .item__delete--btn {
+    color: #28B9B5;
+}
+
+.item:hover .item__value {
+    transform: translateX(-20px);
+}
+
+.item:hover .item__percentage {
+    transform: translateX(-20px);
+}
+
+.item:hover .item__delete--btn {
+    display: inline-block;
+}
+
+.expenses .item__value,
+.expenses .item__percentage,
+.expenses .item__delete--btn {
+    color: #FF5049;
+}
+
+.item__percentage {
+    margin-left: 2rem;
+    transition: transform 0.3s;
+    font-size: 1.1rem;
+    background-color: #FFDAD9;
+    padding: 3px;
+    border-radius: 3px;
+    width: 3.2rem;
+    text-align: center;
 }
