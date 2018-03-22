@@ -65,7 +65,7 @@ var UIController = (function () {
             return {
                 type: document.querySelector(DOMstrings.inputType).value,
                 description: document.querySelector(DOMstrings.inputDescription).value,
-                value: document.querySelector(DOMstrings.inputValue).value
+                value: parseFloat(document.querySelector(DOMstrings.inputValue).value)
             }
         },
 
@@ -132,11 +132,15 @@ var controller = (function (budgetCtrl, UICtrl) {
 
         getInput = UICtrl.getInput();
 
-        newItem = budgetCtrl.addItem(getInput.type, getInput.description, getInput.value);
+        if (getInput.description !== "" && !isNaN(getInput.value) && getInput.value > 0) {
 
-        UICtrl.addListItem(newItem, getInput.type);
 
-        UICtrl.clearInputs();
+            newItem = budgetCtrl.addItem(getInput.type, getInput.description, getInput.value);
+
+            UICtrl.addListItem(newItem, getInput.type);
+
+            UICtrl.clearInputs();
+        }
     };
 
     return {
