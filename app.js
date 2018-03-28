@@ -57,6 +57,21 @@ var budgetController = (function () {
             return newItem;
         },
 
+        deleteItem: function (type, id) {
+            var ids, index;
+
+            ids = data.allItems[type].map(function (x) {
+                return x.id;
+            });
+
+            index = ids.indexOf(id);
+            
+            if (index !== -1) {
+                data.allItems[type].slice(index, 1);
+            }
+
+        },
+
         calculateBudget: function () {
             calculateTotal('exp');
             calculateTotal('inc');
@@ -115,15 +130,15 @@ var UIController = (function () {
             if (type === 'inc') {
 
                 element = DOMstrings.incomeContainer;
-                html = '<div class="item" id="income-%id%"><p class="item__description">%description%</p><div class="item__right"><p class="item__value">%value%</p><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
+                html = '<div class="item" id="inc-%id%"><p class="item__description">%description%</p><div class="item__right"><p class="item__value">%value%</p><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
 
             } else if (type === 'exp') {
 
                 element = DOMstrings.expensesContainer;
-                html = '<div class="item" id="income-%id%"><p class="item__description">%description%</p><div class="item__right"><p class="item__value">%value%</p><p class="item__percentage">21%</p><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
+                html = '<div class="item" id="exp-%id%"><p class="item__description">%description%</p><div class="item__right"><p class="item__value">%value%</p><p class="item__percentage">21%</p><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
             }
 
-            newHtml = html.replace('%id', obj.id);
+            newHtml = html.replace('%id%', obj.id);
             newHtml = newHtml.replace('%value%', obj.value);
             newHtml = newHtml.replace('%description%', obj.description);
 
@@ -213,7 +228,18 @@ var controller = (function (budgetCtrl, UICtrl) {
     };
 
     var deleteItem = function (e) {
-        console.log(e.target);
+        var itemID, splitID, type, ID;
+
+        itemID = e.target.parentNode.parentNode.parentNode.parentNode.id;
+
+        if (itemID) {
+
+            splitID = itemID.split('-');
+            type = splitID[0];
+            ID = parseInt(splitID[1]);
+            
+            budgetCtrl.deleteItem(type,ID);
+        }
 
     };
 
