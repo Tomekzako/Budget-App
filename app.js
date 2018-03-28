@@ -65,9 +65,9 @@ var budgetController = (function () {
             });
 
             index = ids.indexOf(id);
-            
+
             if (index !== -1) {
-                data.allItems[type].slice(index, 1);
+                data.allItems[type].splice(index, 1);
             }
 
         },
@@ -93,6 +93,9 @@ var budgetController = (function () {
                 totalExp: data.totals.exp,
                 percentage: data.percentage
             }
+        },
+        testing: function () {
+            console.log(data);
         }
     };
 
@@ -143,6 +146,13 @@ var UIController = (function () {
             newHtml = newHtml.replace('%description%', obj.description);
 
             document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
+        },
+
+        deleteListItem: function (id) {
+            var el = document.getElementById(id);
+
+            el.parentNode.removeChild(el);
+
         },
 
         clearInputs: function () {
@@ -237,8 +247,12 @@ var controller = (function (budgetCtrl, UICtrl) {
             splitID = itemID.split('-');
             type = splitID[0];
             ID = parseInt(splitID[1]);
-            
-            budgetCtrl.deleteItem(type,ID);
+
+            budgetCtrl.deleteItem(type, ID);
+
+            UICtrl.deleteListItem(itemID);
+
+            updateBudget();
         }
 
     };
@@ -249,7 +263,7 @@ var controller = (function (budgetCtrl, UICtrl) {
                 budget: 0,
                 totalInc: 0,
                 totalExp: 0,
-                percentage: 0
+                percentage: -1
             });
             setupEventListeners();
         }
