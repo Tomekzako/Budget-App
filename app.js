@@ -97,7 +97,8 @@ var UIController = (function () {
         budgetLabel: '.budget__value',
         incomeLabel: '.budget__income--value',
         expensesLabel: '.budget__expenses--value',
-        percentageLabel: '.budget__expenses--percentage'
+        percentageLabel: '.budget__expenses--percentage',
+        container: '.container'
     };
     return {
         getInput: function () {
@@ -148,7 +149,12 @@ var UIController = (function () {
             document.querySelector(DOMstrings.budgetLabel).textContent = obj.budget;
             document.querySelector(DOMstrings.incomeLabel).textContent = obj.totalInc;
             document.querySelector(DOMstrings.expensesLabel).textContent = obj.totalExp;
-            document.querySelector(DOMstrings.percentageLabel).textContent = obj.percentage;
+
+            if (obj.percentage > 0) {
+                document.querySelector(DOMstrings.percentageLabel).textContent = obj.percentage + '%';
+            } else {
+                document.querySelector(DOMstrings.percentageLabel).textContent = '--';
+            }
         },
 
         getDOMstrings: function () {
@@ -171,6 +177,8 @@ var controller = (function (budgetCtrl, UICtrl) {
                 addItem();
             }
         });
+
+        document.querySelector(DOM.container).addEventListener('click', deleteItem);
 
     };
 
@@ -204,8 +212,19 @@ var controller = (function (budgetCtrl, UICtrl) {
         }
     };
 
+    var deleteItem = function (e) {
+        console.log(e.target);
+
+    };
+
     return {
         init: function () {
+            UICtrl.displayBudget({
+                budget: 0,
+                totalInc: 0,
+                totalExp: 0,
+                percentage: 0
+            });
             setupEventListeners();
         }
     }
