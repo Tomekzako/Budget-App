@@ -19,6 +19,13 @@ body {
     font-weight: 400;
 }
 
+.red {
+     color: #ff5049 !important;
+}
+
+.red-focus:focus {
+    border: 1px solid #ff5049 !important;
+}
 
 /**********************************************
 *** TOP PART
