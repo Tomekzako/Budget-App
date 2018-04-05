@@ -251,16 +251,18 @@ var UIController = (function () {
                 }
             });
         },
-        
+
         displayMonth: function () {
-            var now, month, year;
-            
+            var now, month, months, year;
+
             now = new Date();
+
+            months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             month = now.getMonth();
             year = now.getFullYear();
-            
-            document.querySelector(DOMstrings.dateLabel).textContent = month + ' ' + year;
-            
+
+            document.querySelector(DOMstrings.dateLabel).textContent = months[month] + ' ' + year;
+
         },
 
         getDOMstrings: function () {
